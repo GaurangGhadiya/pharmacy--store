@@ -1,19 +1,10 @@
-// ** Next Import
-import Link from 'next/link'
-
-// ** MUI Imports
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
-import MenuItem from '@mui/material/MenuItem'
 import Icon from 'src/@core/components/icon'
-
-// ** Custom Component Import
-import CustomTextField from 'src/@core/components/mui/text-field'
 import { CardHeader } from '@mui/material'
 
 const TableHeader = props => {
-  // ** Props
-  const { value, handleFilter, toggle, handleClickOpen } = props
+  const { handleClickOpen } = props
 
   return (
     <Box

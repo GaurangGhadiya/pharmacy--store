@@ -1,4 +1,4 @@
-import { Box, Card, CardHeader, Grid, IconButton, Menu, MenuItem, Pagination, Tooltip, Typography } from '@mui/material'
+import { Box, Card, Grid } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
 import React, { useState } from 'react'
 import TableHeader from './TableHeader'
@@ -34,6 +34,24 @@ const Menufacturer = () => {
     setType(null)
   }
 
+  const RowOptions = () => {
+    return (
+      <>
+        <Box display={'flex'} justifyContent={'flex-start'} alignItems={'center'} width={'500px'}>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('View')}>
+            <Icon icon='tabler:eye' fontSize={20} />
+          </Box>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Update')}>
+            <Icon icon='tabler:edit' fontSize={20} />
+          </Box>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Delete')}>
+            <Icon icon='tabler:trash' fontSize={20} />
+          </Box>
+        </Box>
+      </>
+    )
+  }
+
   const defaultColumns = [
     {
       flex: 0.09,
@@ -54,24 +72,6 @@ const Menufacturer = () => {
       headerName: 'Address'
     }
   ]
-
-  const RowOptions = () => {
-    return (
-      <>
-        <Box display={'flex'} justifyContent={'flex-start'} alignItems={'center'} width={'500px'}>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('View')}>
-            <Icon icon='tabler:eye' fontSize={20} />
-          </Box>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Update')}>
-            <Icon icon='tabler:edit' fontSize={20} />
-          </Box>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Delete')}>
-            <Icon icon='tabler:trash' fontSize={20} />
-          </Box>
-        </Box>
-      </>
-    )
-  }
 
   const columns = [
     ...defaultColumns,
