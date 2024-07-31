@@ -1,0 +1,20 @@
+/* App.css */
+
+.wrapperClassName {
+  border: 1px solid rgba(47, 43, 61, 0.2);
+  padding: 10px;
+  border-radius: 6px;
+}
+
+.toolbarClassName {
+  /* border-bottom: 1px solid #f1f1f1; */
+  margin-bottom: 10px;
+}
+
+.editorClassName {
+  min-height: 210px;
+  padding: 0 10px;
+  border: 1px solid rgba(47, 43, 61, 0.2);
+  border-radius: 6px;
+  background-color: #fff;
+}
