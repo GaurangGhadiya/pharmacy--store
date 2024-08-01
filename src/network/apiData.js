@@ -1,9 +1,11 @@
 const axios = require('axios').default
 
 // export const BaseURL = process.env.NEXT_PUBLIC_API_BASE_URL
-export const BaseURL = 'http://192.168.11.67:3009/api'
+export const BaseURL = 'http://192.168.29.192:3009/api'
 
 export const BaseURLImage = 'http://192.168.11.67:3009/'
+
+export const updated_by = 1
 
 let defaultHeaders = {
   headers: {

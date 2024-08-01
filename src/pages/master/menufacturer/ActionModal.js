@@ -6,20 +6,56 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import CustomTextField from 'src/@core/components/mui/text-field'
 import { Grid } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addMenufacturer } from 'src/network/actions/addMenufacturer'
+import { getMenufacturer } from 'src/network/actions/getMenufacturer'
+import { updated_by } from 'src/network/apiData'
+import { deleteMenufacturer } from 'src/network/actions/deleteMenufacturer'
 
-const ActionModal = ({ open, handleClose, type }) => {
+const ActionModal = ({ open, handleClose, type, clickedData }) => {
+  const dispatch = useDispatch()
   const [data, setData] = useState({ name: '', number: '', address: '' })
+
+  useEffect(() => {
+    setData({ name: clickedData?.mnfctrer_name, number: clickedData?.contact_no, address: clickedData?.address })
+  }, [clickedData])
 
   const handleChange = e => {
     const { name, value } = e.target
     setData({ ...data, [name]: value })
   }
+  console.log('clickedData', clickedData, type)
+
+  const handleSubmit = () => {
+    const extra = () => {
+      handleClose()
+      setData({ name: '', number: '', address: '' })
+      dispatch(getMenufacturer())
+    }
+
+    const body = {
+      mnfctrer_name: data?.name || '',
+      address: data?.address || '',
+      contact_no: data?.number || '',
+      updated_by: updated_by
+    }
+    if (type == 'Update' || type == 'Delete') {
+      body['manufacture_id'] = clickedData?.id || 0
+    }
+
+    if (type == 'Add') {
+      dispatch(addMenufacturer('add-manufacture', body, extra))
+    } else if (type == 'Update') {
+      dispatch(addMenufacturer('update-manufacture', body, extra))
+    } else if (type == 'Delete') {
+      dispatch(deleteMenufacturer('delete-manufacture', body, extra))
+    }
+  }
 
   return (
     <>
       <Dialog
-        onClose={handleClose}
         aria-labelledby='customized-dialog-title'
         open={open}
         PaperProps={{ sx: { overflow: 'visible' } }}
@@ -73,11 +109,18 @@ const ActionModal = ({ open, handleClose, type }) => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} variant='contained' color='error'>
+          <Button
+            onClick={() => {
+              handleClose()
+              setData({ name: '', number: '', address: '' })
+            }}
+            variant='contained'
+            color='error'
+          >
             {type == 'View' ? 'Close' : 'Cancel'}
           </Button>
           {type != 'View' && (
-            <Button onClick={handleClose} variant='contained'>
+            <Button onClick={handleSubmit} variant='contained'>
               {type == 'Delete' ? 'Delete' : 'Submit'}
             </Button>
           )}

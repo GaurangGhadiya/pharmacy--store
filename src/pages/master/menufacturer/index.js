@@ -1,50 +1,49 @@
-import { Box, Card, Grid } from '@mui/material'
+import { Box, Card, Grid, Pagination } from '@mui/material'
 import { DataGrid } from '@mui/x-data-grid'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TableHeader from './TableHeader'
 import Icon from 'src/@core/components/icon'
 import ActionModal from './ActionModal'
-
-let data = [
-  {
-    id: '1',
-    name: 'abcd',
-    number: '9016193206',
-    address: 'mehli, shimla'
-  },
-  {
-    id: '2',
-    name: 'test',
-    number: '6597235864',
-    address: 'panthaghati, shimla'
-  }
-]
+import { useDispatch, useSelector } from 'react-redux'
+import { getMenufacturer } from 'src/network/actions/getMenufacturer'
 
 const Menufacturer = () => {
+  const dispatch = useDispatch()
+  const getData = useSelector(store => store?.getMenufacturer?.data)
   const [open, setOpen] = useState(false)
   const [type, setType] = useState(null)
+  const [clickedData, setClickedData] = useState({})
+  const [page, setPage] = useState(1)
 
-  const handleClickOpen = type => {
+  console.log('getData', getData)
+
+  useEffect(() => {
+    dispatch(getMenufacturer(page))
+  }, [page])
+
+  const handleClickOpen = (type, row = {}) => {
     setOpen(true)
     setType(type)
+    setClickedData(row?.row)
   }
 
   const handleClose = () => {
     setOpen(false)
     setType(null)
+    setClickedData({})
   }
 
-  const RowOptions = () => {
+  const RowOptions = row => {
     return (
       <>
         <Box display={'flex'} justifyContent={'flex-start'} alignItems={'center'} width={'500px'}>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('View')}>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('View', row)}>
             <Icon icon='tabler:eye' fontSize={20} />
           </Box>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Update')}>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Update', row)}>
             <Icon icon='tabler:edit' fontSize={20} />
           </Box>
-          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Delete')}>
+          <Box mr={5} style={{ cursor: 'pointer' }} onClick={() => handleClickOpen('Delete', row)}>
             <Icon icon='tabler:trash' fontSize={20} />
           </Box>
         </Box>
@@ -56,13 +55,13 @@ const Menufacturer = () => {
     {
       flex: 0.09,
       minWidth: 120,
-      field: 'name',
+      field: 'mnfctrer_name',
       headerName: 'Menufacturer Name'
     },
     {
       flex: 0.09,
       minWidth: 80,
-      field: 'number',
+      field: 'contact_no',
       headerName: 'Contact Number'
     },
     {
@@ -81,7 +80,7 @@ const Menufacturer = () => {
       sortable: false,
       field: 'actions',
       headerName: 'Actions',
-      renderCell: ({ row }) => <RowOptions />
+      renderCell: ({ row }) => <RowOptions row={row} />
     }
   ]
 
@@ -95,16 +94,22 @@ const Menufacturer = () => {
               autoHeight
               pagination
               rowHeight={62}
-              rows={data || []}
+              rows={getData || []}
               columns={columns}
               disableRowSelectionOnClick
               hideFooter
               hideFooterPagination
             />
+            <Pagination
+              style={{ float: 'right', margin: '15px 0' }}
+              count={10}
+              page={page}
+              onChange={(e, v) => setPage(v)}
+            />
           </Card>
         </Grid>
       </Grid>
-      <ActionModal open={open} handleClose={handleClose} type={type} />
+      <ActionModal open={open} handleClose={handleClose} type={type} clickedData={clickedData} />
     </>
   )
 }

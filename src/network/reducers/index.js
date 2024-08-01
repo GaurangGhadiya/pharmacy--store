@@ -14,6 +14,9 @@ import addSeller from './addSeller'
 import getSeller from './getSeller'
 import getSellerById from './getSellerById'
 import login from './login'
+import getMenufacturer from './getMenufacturer'
+import addMenufacturer from './addMenufacturer'
+import deleteMenufacturer from './deleteMenufacturer'
 
 const rootReducer = combineReducers({
   getCode,
@@ -30,7 +33,10 @@ const rootReducer = combineReducers({
   addSeller,
   getSeller,
   getSellerById,
-  login
+  login,
+  getMenufacturer,
+  addMenufacturer,
+  deleteMenufacturer
 })
 
 export default rootReducer
