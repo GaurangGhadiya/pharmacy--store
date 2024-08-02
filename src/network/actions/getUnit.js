@@ -21,7 +21,7 @@ export const getUnitFaliure = error => ({
 export const getUnit = () => {
   return async dispatch => {
     try {
-      const response = await ApiGetNoAuth(`/product/get-unit`, {})
+      const response = await ApiGetNoAuth(`/master/get-unit`, {})
 
       dispatch(getUnitSuccess(response))
     } catch (error) {

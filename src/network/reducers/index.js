@@ -26,6 +26,7 @@ import deletePharmaGroup from './deletePharmaGroup'
 import getSupplierType from './getSupplierType'
 import addSupplierType from './addSupplierType'
 import deleteSupplierType from './deleteSupplierType'
+import addUnit from './addUnit'
 
 const rootReducer = combineReducers({
   getCode,
@@ -54,7 +55,8 @@ const rootReducer = combineReducers({
   deletePharmaGroup,
   getSupplierType,
   addSupplierType,
-  deleteSupplierType
+  deleteSupplierType,
+  addUnit
 })
 
 export default rootReducer
