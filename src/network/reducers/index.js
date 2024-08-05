@@ -30,6 +30,10 @@ import addUnit from './addUnit'
 import getTax from './getTax'
 import addTax from './addTax'
 import deleteTax from './deleteTax'
+import getSupplierTypeMaster from './getSupplierTypeMaster'
+import getSupplier from './getSupplier'
+import addSupplier from './addSupplier'
+import deleteSupplier from './deleteSupplier'
 
 const rootReducer = combineReducers({
   getCode,
@@ -62,7 +66,11 @@ const rootReducer = combineReducers({
   addUnit,
   getTax,
   addTax,
-  deleteTax
+  deleteTax,
+  getSupplierTypeMaster,
+  getSupplier,
+  addSupplier,
+  deleteSupplier
 })
 
 export default rootReducer
