@@ -81,11 +81,11 @@ const navigation = () => {
 
 const navigationSeller = () => {
   return [
-    {
-      title: 'Dashboard',
-      path: '/dashboard',
-      icon: 'tabler:smart-home'
-    },
+    // {
+    //   title: 'Dashboard',
+    //   path: '/dashboard',
+    //   icon: 'tabler:smart-home'
+    // },
     {
       title: 'Master',
       icon: 'carbon:product',
@@ -124,7 +124,11 @@ const navigationSeller = () => {
         }
       ]
     },
-
+    {
+      title: 'Purchase',
+      path: '/purchase',
+      icon: 'tabler:smart-home'
+    },
     {
       title: 'Products',
       icon: 'carbon:product',

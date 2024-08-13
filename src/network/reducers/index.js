@@ -39,6 +39,9 @@ import getMenufacturerMaster from './getMenufacturerMaster'
 import getDrug from './getDrug'
 import addDrug from './addDrug'
 import deleteDrug from './deleteDrug'
+import getSupplierMasters from './getSupplierMaster'
+import getUnitMaster from './getUnitMaster'
+import getTaxMaster from './getTaxMaster'
 
 const rootReducer = combineReducers({
   getCode,
@@ -80,7 +83,10 @@ const rootReducer = combineReducers({
   getMenufacturerMaster,
   getDrug,
   addDrug,
-  deleteDrug
+  deleteDrug,
+  getSupplierMasters,
+  getUnitMaster,
+  getTaxMaster
 })
 
 export default rootReducer
